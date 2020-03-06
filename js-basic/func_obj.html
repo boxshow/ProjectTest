@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function pm(msg){
+				document.write(msg + "<br/>");
+			}
+
+			//------------------------------------全局变量与局部变量
+/* 			var msg = "全局变量";
+			function add(a,b){
+				var ret;
+				ret = a + b;
+				return ret;
+			}
+			function show(){
+				var msg = "局部变量";	//此时局部变量优先
+				msg = "局部变量";		//此时会覆盖全局变量
+				pm(msg);
+			}
+			
+			var sum;
+			pm("sum=" + sum);//此时sum值为undefined
+			sum = add(2,3);
+			pm("sum=" + sum);
+			show();
+			pm(msg);//调用全局变量 */
+			//------------------------------------参数个数可变函数定义
+			
+/* 			//函数虽然定义时是声明成两个参数，但调用时却是可以传入任意个
+			function show(x,y){
+				pm(x+":"+y);
+			}
+			show(4,8); //结果：4:8
+			show(4);//结果：4:undefined
+			show(); //结果：undefined:undefined
+			show(4,8,89); //结果：4:8 */
+
+/* 			function func(){
+				for(var i=0;i<arguments.length;i++){	//调用 arguments 对象
+					pm(arguments[i]);
+				}
+			}
+			func(111,222,333);
+			func("aaa","bbb","ccc"); */
+			//------------------------------------定义一般函数，动态函数，匿名函数
+			//动态函数
+			//用 Function 对象创建动态函数，相当于C++的指针函数
+			//所以参数必须是字符串，且最后一个参数是函数的功能执行代码
+			
+			//作用与区别
+			//动态函数可以作为参数传递，函数的功能执行代码可以随时改变
+			//普通函数是预先固定好的执行代码
+//===
+/* 			var add = new Function("a","b","c","return a + b + c;");
+			//相当于以下代码
+			function add(a,b,c){
+				return a + b + c;
+			}
+			pm(add(1,2,3));
+			function test(f){
+				var a=1;
+				var b=2;
+				var c=3;
+				pm(f(a,b,c));
+			}
+			test(add); */
+//===
+			//匿名函数
+			//通常在定义事件属性的行为时较为常用
+/* 			var add = function (a,b,c){
+				var sum;
+				sum = a + b + c;
+				pm(sum);
+				return sum;
+			}
+			
+ 			window.onload = add;
+			//可以写成匿名函数的形式
+			window.onload = function(a,b,c){
+				pm(a + b + c);
+			} */
+//===
+/* 			function add(a,b,c){
+				return a + b + c;
+			}
+			var sum = add(1,2,3);
+			pm(sum);
+    
+			var sum2 = add;		//相当于java当中的 引用捆绑
+			pm(sum2);		//结果：sum2.toString()，也就是add.toString()
+			pm(sum2(1,2,3)); //等价于调用：add(1,2,3) */
+
+			//------------------------------------创建对象
+/* 			//内置对象
+			var o = new Object();	//用 new 实例化对象
+			o.name = "小李";
+			pm("o.name:" + o.name);
+			
+			//自定义对象
+			function MyObject(){}	//构造函数
+			var mo = new MyObject();// new 出来了一个抽象函数 MyObject 的实例对象
+			mo.name = "小张";
+			pm("mo.name:" + mo.name); */
+			//------------------------------------构造方法和 this 关键字
+/* 			function Person(name){	//构造函数，函数中不要有 return 的返回语句
+				this.name = name;	//this 为 new 的当前实例对象
+				this.say = sayFunc;
+			}
+			function sayFunc(words){
+				//pm(this.name);
+				this.name = words;
+			}
+			
+			var p1 = new Person("XiaoLi");
+			var p2 = new Person("XiaoZhang");
+			pm(p1.name);
+			p1.say("I am XiaoLi");
+			pm(p1.name);
+			pm(p2.name); */
+			//------------------------------------类的定义与实例对象
+/* 			class Person {
+				person = "xxx";			//定义在实例对象（ this ）上的属性。
+				constructor(name){		//自动执行 constructor() 函数，函数中不要有 return 的返回语句
+					this.name = name;	//直接用this定义属性，this 为 new 的当前实例对象
+				}
+				say(words){				//方法前不用加 function
+					return  words + this.name;
+				}
+			} 
+			var p1 = new Person("小李");
+			var p2 = new Person("小张");
+			pm(p1.say("我是"));
+			pm(p2.say("我叫"));
+			pm(p1.person); */
+			//------------------------------------数组的定义
+			var a0 = [3,"sfd",45.5];		//列表方式的定义
+			pm(a0.length);
+			
+			var a1 = new Array();			//对象方式的定义
+			var a2 = new Array(3);			//定义长度为3个元素的数组，参数是整数
+			var a3 = new Array(456.4,6);	//定义多个元素并赋值的数组，当参数为一个时必须是字符串
+			
+			pm(a1.length);
+			pm(a2.length);
+			pm(a3.length);
+			pm("----------------------");
+			for(x in a3){
+				pm(a3[x]);
+			}
+
+			
+		</script>
+	</body>
+</html>

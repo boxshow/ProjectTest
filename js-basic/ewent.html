@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			function print(msg){
+				document.write(msg + "<br/>");
+			}
+			function nomenu(){
+				//return false;
+				window.event.returnValue = false;
+			}
+			document.oncontextmenu = nomenu;						//第二种方式，在<script>标签里调用函数
+		</script>
+		<script type="text/javascript" for="document" event="oncontextmenu">
+			window.event.returnValue = false;						//第三种方式，在<script>标签里指定事件源和事件名
+		</script>
+	</head>
+	<!--body style="height:1000px" oncontextmenu="nomenu()"-->		<!--第一种方式，在标签属性里调用函数-->
+	<!--body style="height:1000px" oncontextmenu="return false"-->	<!--oncontextmenu后面加表达式而不是变量值-->
+	<body>
+<script type="text/javascript">
+
+
+
+</script>
+	</body>
+</html>
