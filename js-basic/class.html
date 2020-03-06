@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button>点击</button>
+		<script type="text/javascript">
+			function pm(msg){
+				document.write(msg + "<br/>");
+			}
+			var that;
+			class Person {
+
+				constructor(name){
+					that = this;
+					this.name = name;
+					this.btn = document.querySelector('button');
+					this.btn.onclick = this.show;
+
+				}
+				say(words){
+					//console.log(words + this.name);
+					return words + this.name;
+				}
+				show(){
+					console.log(that.name);
+				}
+			}
+			var xl = new Person("你爸爸");
+			console.log(xl.say("我是"));
+	
+			class Man extends Person{
+				constructor(name,age){
+					super(name);
+					this.age = age;
+				}
+
+				todo(words){
+					return words + this.age;
+				}
+			}
+			var m =new Man("your sun",18);
+			console.log(m.say("I am ") + m.todo(" and age is "));
+
+			
+			
+		</script>
+	</body>
+</html>
